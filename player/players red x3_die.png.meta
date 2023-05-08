@@ -47,7 +47,7 @@ TextureImporter:
   spriteMeshType: 1
   alignment: 0
   spritePivot: {x: 0.5, y: 0.5}
-  spritePixelsToUnits: 100
+  spritePixelsToUnits: 16
   spriteBorder: {x: 0, y: 0, z: 0, w: 0}
   spriteGenerateFallbackPhysicsShape: 1
   alphaUsage: 1
@@ -241,12 +241,12 @@ TextureImporter:
     weights: []
     secondaryTextures: []
     nameFileIdTable:
-      players red x3_die_0: -1109973803
-      players red x3_die_1: -385555214
-      players red x3_die_2: 1064850764
       players red x3_die_3: -498832021
+      players red x3_die_2: 1064850764
+      players red x3_die_0: -1109973803
       players red x3_die_4: 777865981
       players red x3_die_5: -1250190416
+      players red x3_die_1: -385555214
   spritePackingTag: 
   pSDRemoveMatte: 0
   pSDShowRemoveMatteOption: 0

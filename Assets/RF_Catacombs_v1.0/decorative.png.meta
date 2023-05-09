@@ -47,7 +47,7 @@ TextureImporter:
   spriteMeshType: 1
   alignment: 0
   spritePivot: {x: 0.5, y: 0.5}
-  spritePixelsToUnits: 16
+  spritePixelsToUnits: 32
   spriteBorder: {x: 0, y: 0, z: 0, w: 0}
   spriteGenerateFallbackPhysicsShape: 1
   alphaUsage: 1
@@ -1165,56 +1165,56 @@ TextureImporter:
     weights: []
     secondaryTextures: []
     nameFileIdTable:
-      decorative_0: 1795956183
-      decorative_1: 78979498
-      decorative_10: 1416931844
-      decorative_11: -812291272
-      decorative_12: -1988921947
-      decorative_13: 2038887441
-      decorative_14: 853116891
-      decorative_15: -315536279
-      decorative_16: 976309381
-      decorative_17: 442970310
-      decorative_18: 197607373
-      decorative_19: 624902021
-      decorative_2: -1985428678
-      decorative_20: 701578046
-      decorative_21: 689904131
-      decorative_22: 859480186
-      decorative_23: 1925245555
-      decorative_24: -44514388
-      decorative_25: -551869425
-      decorative_26: -1517982084
-      decorative_27: -1166527553
-      decorative_28: -477945430
-      decorative_29: -1797494303
-      decorative_3: 145637200
-      decorative_30: 1514365825
-      decorative_31: -218722837
-      decorative_32: 1737153704
-      decorative_33: -2063633163
-      decorative_34: 785931588
-      decorative_35: -2036429351
-      decorative_36: -1704286998
-      decorative_37: -362498269
-      decorative_38: 1203165572
-      decorative_39: -1205719361
-      decorative_4: 138173512
-      decorative_40: -264928961
-      decorative_41: 1364293312
-      decorative_42: 1797874599
-      decorative_43: 519603959
-      decorative_44: 1272236809
-      decorative_45: -162693856
-      decorative_46: 874156367
-      decorative_47: 1241039979
-      decorative_48: 1481368383
       decorative_49: 943983439
+      decorative_41: 1364293312
+      decorative_40: -264928961
+      decorative_21: 689904131
+      decorative_16: 976309381
+      decorative_46: 874156367
       decorative_5: 1925119603
-      decorative_6: -1914710524
+      decorative_37: -362498269
+      decorative_26: -1517982084
+      decorative_3: 145637200
+      decorative_12: -1988921947
+      decorative_43: 519603959
+      decorative_10: 1416931844
+      decorative_1: 78979498
+      decorative_9: -966488754
+      decorative_15: -315536279
+      decorative_32: 1737153704
+      decorative_38: 1203165572
+      decorative_20: 701578046
+      decorative_34: 785931588
+      decorative_17: 442970310
+      decorative_13: 2038887441
+      decorative_27: -1166527553
+      decorative_30: 1514365825
+      decorative_42: 1797874599
       decorative_7: -1262584025
       decorative_8: 976051453
-      decorative_9: -966488754
+      decorative_18: 197607373
+      decorative_0: 1795956183
+      decorative_4: 138173512
+      decorative_6: -1914710524
+      decorative_47: 1241039979
+      decorative_25: -551869425
+      decorative_44: 1272236809
+      decorative_29: -1797494303
+      decorative_36: -1704286998
+      decorative_48: 1481368383
+      decorative_45: -162693856
+      decorative_28: -477945430
+      decorative_22: 859480186
+      decorative_23: 1925245555
+      decorative_2: -1985428678
+      decorative_35: -2036429351
+      decorative_11: -812291272
+      decorative_14: 853116891
+      decorative_31: -218722837
+      decorative_24: -44514388
+      decorative_19: 624902021
+      decorative_33: -2063633163
+      decorative_39: -1205719361
   spritePackingTag: 
   pSDRemoveMatte: 0
   pSDShowRemoveMatteOption: 0

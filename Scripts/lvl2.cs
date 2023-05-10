@@ -1,12 +1,9 @@
 using System.Collections;
 using System.Collections.Generic;
-using UnityEditor.SearchService;
 using UnityEngine;
-using UnityEngine.SceneManagement;
 
-public class Player : MonoBehaviour
+public class lvl2 : MonoBehaviour
 {
-
     // Start is called before the first frame update
     void Start()
     {
@@ -18,12 +15,11 @@ public class Player : MonoBehaviour
     {
         
     }
-
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        if (collision.gameObject.CompareTag("teleporter"))
+        if(collision.gameObject.layer == 6)
         {
-            SceneManager.LoadScene("level2");
+            //damage player
         }
     }
 }

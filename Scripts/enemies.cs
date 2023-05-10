@@ -14,19 +14,24 @@ public class enemies : MonoBehaviour
         Attack
     }
 
+    Animator animator;
+    SpriteRenderer spriteRenderer;
+
     public EnemyState currentState = EnemyState.Idle;
     public Transform playerTransform;
+
     public float moveSpeed = 2.0f;
+    public float playerenemydiff = 1.0f;
+
     public float attackDamage = 10.0f;
     public float attackRange = 1.0f;
-    public float playerenemydiff = 1.0f;
-    public float attackRate = 2f;
-    float nextAttackTime = 0f;
+
+    public float nextAttackRate = 2f;
+    float timeSinceLastAttack = 0f;
+
     public int maxHealth = 50;
     int currentHealth;
 
-    Animator animator;
-    SpriteRenderer spriteRenderer;
     private void Start()
     {
         currentHealth = maxHealth;
@@ -52,11 +57,8 @@ public class enemies : MonoBehaviour
 
     private void Idle()
     {
-        animator.SetBool("damage", false);
-        animator.SetBool("attack", false);
-        animator.SetBool("run", false);
-        animator.SetBool("idle", true);
-        if (Math.Abs(transform.position.x - playerTransform.position.x) <= playerenemydiff)
+        animator.SetTrigger("idle");
+        if (Vector3.Distance(transform.position, playerTransform.position) <= playerenemydiff)
         {
             currentState = EnemyState.Chase;
         }
@@ -64,21 +66,24 @@ public class enemies : MonoBehaviour
 
     private void Chase()
     {
+        //animation
+        animator.SetTrigger("run");
 
-        animator.SetBool("damage", false);
-        animator.SetBool("attack", false);
-        animator.SetBool("idle", false);
-        animator.SetBool("run", true);
-        if (playerTransform.position.x > transform.position.x)
+        //transfrom flip X
+        if (Vector3.Distance(playerTransform.position, transform.position) > 0.01f)
         {
-            spriteRenderer.flipX = false;
-        }
-        else if (playerTransform.position.x < transform.position.x)
-        {
-            spriteRenderer.flipX = true;
+            if (playerTransform.position.x > transform.position.x)
+            {
+                spriteRenderer.flipX = false;
+            }
+            else
+            {
+                spriteRenderer.flipX = true;
+            }
         }
 
 
+        //moving
         Vector2 direction = playerTransform.position - transform.position;
         transform.Translate(direction.normalized * moveSpeed * Time.deltaTime);
 
@@ -86,7 +91,7 @@ public class enemies : MonoBehaviour
         {
             currentState = EnemyState.Attack;
         }
-        if (Math.Abs(playerTransform.position.x - transform.position.x) > playerenemydiff)
+        if (Vector3.Distance(playerTransform.position, transform.position) > playerenemydiff)
         {
             currentState = EnemyState.Idle;
         }
@@ -94,24 +99,28 @@ public class enemies : MonoBehaviour
 
     private void Attack()
     {
-
-        // Stop moving
         transform.Translate(Vector2.zero);
 
-        //animation
-        animator.SetBool("idle", false);
-        animator.SetBool("run", false);
-        animator.SetBool("damage", false);
-        animator.SetBool("attack", true);
+        if (timeSinceLastAttack >= nextAttackRate)
+        {
+            // Reset the timer
+            timeSinceLastAttack = 0f;
+            // Stop moving
+
+            //animation
+            animator.SetTrigger("attack");
 
 
-        // Attack the player
+            // Attack the player
 
-        //playerTransform.GetComponent<PlayerHealth>().TakeDamage(attackDamage);
+            //playerTransform.GetComponent<PlayerHealth>().TakeDamage(attackDamage);
 
 
-        // Transition back to chase state
-        currentState = EnemyState.Chase;
+            // Transition back to chase state
+            currentState = EnemyState.Chase;
+        }
+        else
+            timeSinceLastAttack += Time.deltaTime;
     }
     public void takeDamage(int damage)
     {
@@ -136,11 +145,7 @@ public class enemies : MonoBehaviour
     {
         Debug.Log("enemy died");
         // animation
-        animator.SetBool("idle", false);
-        animator.SetBool("run", false);
-        animator.SetBool("attack", false);
-        animator.SetBool("damage", false);
-        animator.SetBool("die", true);
+        animator.SetTrigger("die");
 
         // disable enemy
         GetComponent<Collider2D>().enabled = false;

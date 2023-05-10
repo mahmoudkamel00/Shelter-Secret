@@ -23,14 +23,17 @@ public class enemies : MonoBehaviour
     public float moveSpeed = 2.0f;
     public float playerenemydiff = 1.0f;
 
-    public float attackDamage = 10.0f;
+    public int attackDamage = 10;
     public float attackRange = 1.0f;
 
-    public float nextAttackRate = 2f;
-    float timeSinceLastAttack = 0f;
+
+    public float attackCooldown = 2f;
+    private bool canAttack = true;
+
 
     public int maxHealth = 50;
     int currentHealth;
+
 
     private void Start()
     {
@@ -41,6 +44,7 @@ public class enemies : MonoBehaviour
 
     private void Update()
     {
+
         switch (currentState)
         {
             case EnemyState.Idle:
@@ -50,7 +54,11 @@ public class enemies : MonoBehaviour
                 Chase();
                 break;
             case EnemyState.Attack:
-                Attack();
+                if (canAttack)
+                {
+                    Attack();
+                    StartCoroutine(AttackCooldown());
+                }
                 break;
         }
     }
@@ -99,37 +107,25 @@ public class enemies : MonoBehaviour
 
     private void Attack()
     {
+        // Stop moving
         transform.Translate(Vector2.zero);
 
-        if (timeSinceLastAttack >= nextAttackRate)
-        {
-            // Reset the timer
-            timeSinceLastAttack = 0f;
-            // Stop moving
+        //animation
+        animator.SetTrigger("attack");
 
-            //animation
-            animator.SetTrigger("attack");
+        // Attack the player
+        playerTransform.GetComponent<player_move>().takedamage(attackDamage);
 
+        //reset
+        canAttack = false;
 
-            // Attack the player
-
-            //playerTransform.GetComponent<PlayerHealth>().TakeDamage(attackDamage);
-
-
-            // Transition back to chase state
-            currentState = EnemyState.Chase;
-        }
-        else
-            timeSinceLastAttack += Time.deltaTime;
+        // Transition back to chase state
+        currentState = EnemyState.Chase;
     }
+            
     public void takeDamage(int damage)
     {
         currentHealth -= damage;
-        animator.SetBool("idle", false);
-        animator.SetBool("run", false);
-        animator.SetBool("attack", false);
-        animator.SetBool("die", false);
-        animator.SetBool("damage", true);
 
         Debug.Log(currentHealth);
 
@@ -145,22 +141,27 @@ public class enemies : MonoBehaviour
     {
         Debug.Log("enemy died");
         // animation
-        animator.SetTrigger("die");
 
         // disable enemy
+
         GetComponent<Collider2D>().enabled = false;
         GetComponent<Rigidbody2D>().gravityScale = 0;
         this.enabled = false;
-        //Destroy(gameObject,2);
+        //Instantiate(deatheffect, transform.position, Quaternion.identity);
+        animator.SetTrigger("die");
+        Destroy(gameObject, 1);
 
     }
-    private void OnTriggerEnter2D(Collider2D collision)
+    private void OnCollisionEnter2D(Collision2D collision)
     {
         if (collision.gameObject.CompareTag("Player"))
         {
-            //GetComponent<PlayerHealth>().TakeDamage(10);
+            GetComponent<player_move>().takedamage(attackDamage);
         }
-
+        if (collision.gameObject.CompareTag("bullet"))
+        {
+            currentHealth -= 25;
+        }
     }
 
     private void OnTriggerExit2D(Collider2D other)
@@ -171,4 +172,14 @@ public class enemies : MonoBehaviour
             Debug.Log("out");
         }
     }
+
+    private System.Collections.IEnumerator AttackCooldown()
+    {
+        // Wait for the specified cooldown duration
+        yield return new WaitForSeconds(attackCooldown);
+
+        // Set the attack flag to true, allowing the enemy to attack again
+        canAttack = true;
+    }
 }
+

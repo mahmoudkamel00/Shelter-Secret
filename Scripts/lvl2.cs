@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class lvl2 : MonoBehaviour
 {
+    public PlayerBullet bullet;
+    public Transform launchOffset;
     // Start is called before the first frame update
     void Start()
     {
@@ -13,7 +15,11 @@ public class lvl2 : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+
+        if (Input.GetKeyDown(KeyCode.J))
+        {
+            Instantiate(bullet, launchOffset.position, transform.rotation);
+        }
     }
     private void OnCollisionEnter2D(Collision2D collision)
     {

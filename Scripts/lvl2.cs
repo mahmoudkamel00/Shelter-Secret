@@ -1,12 +1,11 @@
 using System.Collections;
 using System.Collections.Generic;
-using UnityEditor.SearchService;
 using UnityEngine;
-using UnityEngine.SceneManagement;
 
-public class Player : MonoBehaviour
+public class lvl2 : MonoBehaviour
 {
-
+    public PlayerBullet bullet;
+    public Transform launchOffset;
     // Start is called before the first frame update
     void Start()
     {
@@ -16,14 +15,17 @@ public class Player : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
-    }
 
+        if (Input.GetKeyDown(KeyCode.J))
+        {
+            Instantiate(bullet, launchOffset.position, transform.rotation);
+        }
+    }
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        if (collision.gameObject.CompareTag("teleporter"))
+        if(collision.gameObject.layer == 6)
         {
-            SceneManager.LoadScene("level2");
+            //damage player
         }
     }
 }

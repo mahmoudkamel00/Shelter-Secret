@@ -127,8 +127,6 @@ public class enemies : MonoBehaviour
     {
         currentHealth -= damage;
 
-        Debug.Log(currentHealth);
-
         if (currentHealth <= 0)
         {
             die();
@@ -140,15 +138,15 @@ public class enemies : MonoBehaviour
     void die()
     {
         Debug.Log("enemy died");
+
         // animation
+        animator.SetTrigger("die");
 
         // disable enemy
-
         GetComponent<Collider2D>().enabled = false;
         GetComponent<Rigidbody2D>().gravityScale = 0;
         this.enabled = false;
         //Instantiate(deatheffect, transform.position, Quaternion.identity);
-        animator.SetTrigger("die");
         Destroy(gameObject, 1);
 
     }

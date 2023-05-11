@@ -2,7 +2,7 @@ using UnityEngine;
 
 public class PlayerBullet : MonoBehaviour
 {
-    public float speed = 5f;
+    public float speed = 8f;
     public Rigidbody2D rb;
     public Transform player;
     public int damage = 25;
@@ -34,6 +34,11 @@ public class PlayerBullet : MonoBehaviour
             collision.gameObject.GetComponent<enemies>().takeDamage(25);
             Destroy(gameObject);
         }
+        else if (collision.gameObject.CompareTag("walls") || collision.gameObject.CompareTag("decoration"))
+        {
+            Destroy(gameObject);
+        }
+
     }
     void bullet()
     { 

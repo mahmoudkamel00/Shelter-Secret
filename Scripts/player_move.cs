@@ -25,8 +25,17 @@ public class player_move : MonoBehaviour
         float horizontalInput = Input.GetAxis("Horizontal");
         float verticalInput = Input.GetAxis("Vertical");
 
-        animator.SetFloat("speed_x", Mathf.Abs(horizontalInput));
-        animator.SetFloat("speed_y", Mathf.Abs(verticalInput));
+        //animation run based on if player collide with armor suit or not to change the animation
+        if (GetComponent<lvl2>().armorsuit)
+        {
+            animator.SetFloat("speed_xr", Mathf.Abs(horizontalInput));
+            animator.SetFloat("speed_yr", Mathf.Abs(verticalInput));
+        }
+        else
+        {
+            animator.SetFloat("speed_x", Mathf.Abs(horizontalInput));
+            animator.SetFloat("speed_y", Mathf.Abs(verticalInput));
+        }
 
         Vector3 newPosition = transform.position + new Vector3(horizontalInput, verticalInput, 0) * speed * Time.deltaTime;
         transform.position = newPosition;
@@ -62,6 +71,15 @@ public class player_move : MonoBehaviour
     public void die()
     {
         //animation die
+
         Debug.Log("player died");
+        cooldown(1);
+        transform.position = GetComponent<lvl2>().respawnpoint;
+        currentHealth = 100;
+    }
+    private System.Collections.IEnumerator cooldown(int time)
+    {
+        // Wait for the specified cooldown duration
+        yield return new WaitForSeconds(time);
     }
 }

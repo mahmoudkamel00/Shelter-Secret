@@ -173,7 +173,7 @@ MonoBehaviour:
   currentState: 0
   playerTransform: {fileID: 0}
   moveSpeed: 2
-  playerenemydiff: 4
+  playerenemydiff: 7
   attackDamage: 10
   attackRange: 1
   attackCooldown: 2

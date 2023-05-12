@@ -51,7 +51,7 @@ public class lvl2 : MonoBehaviour
     {
         if (collision.gameObject.CompareTag("teleporter") && nextLevel)
         {
-            SceneManager.LoadScene("Level3");
+            SceneManager.LoadScene("level3");
         }
         if (collision.gameObject.CompareTag("armor"))
         {

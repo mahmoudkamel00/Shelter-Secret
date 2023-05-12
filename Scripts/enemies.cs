@@ -152,9 +152,9 @@ public class enemies : MonoBehaviour
 
         // animation
         animator.SetBool("die",true);
-        animator.SetBool("idle", true);
-        animator.SetBool("attack", true);
-        animator.SetBool("run", true);
+        animator.SetBool("idle", false);
+        animator.SetBool("attack", false);
+        animator.SetBool("run", false);
 
         // disable enemy
         GetComponent<Collider2D>().enabled = false;

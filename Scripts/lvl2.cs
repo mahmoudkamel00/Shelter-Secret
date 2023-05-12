@@ -5,7 +5,7 @@ using UnityEngine.SceneManagement;
 
 public class lvl2 : MonoBehaviour
 {
-    Animator animator;
+    public Animator animator;
 
     public PlayerBullet bullet;
     public Transform launchOffset;
@@ -38,10 +38,11 @@ public class lvl2 : MonoBehaviour
             {
                 if (Time.time >= nextAttackTime) //to make the player doesn't attack consecutive, using time
                 {
+                    animator.SetBool("attack", true);
                     //animator.SetTrigger("attack");
                     Instantiate(bullet, launchOffset.position, transform.rotation);
                     nextAttackTime = Time.time + attackRate;
-                    animator.SetTrigger("attack");
+                   
                 }
             }
         }

@@ -2,7 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.UIElements;
+//using UnityEngine.UIElements;
 
 public class enemies : MonoBehaviour
 {
@@ -14,8 +14,8 @@ public class enemies : MonoBehaviour
         Attack
     }
 
-    Animator animator;
-    SpriteRenderer spriteRenderer;
+   public Animator animator;
+    public SpriteRenderer spriteRenderer;
 
     public EnemyState currentState = EnemyState.Idle;
     public Transform playerTransform;
@@ -34,12 +34,18 @@ public class enemies : MonoBehaviour
     public int maxHealth = 50;
     int currentHealth;
 
+   public player_move plmv;
+    //public enemies(int attackDamage)
+    //{
+    //    this.attackDamage = attackDamage;
+    //}
 
     private void Start()
     {
         currentHealth = maxHealth;
         animator = GetComponent<Animator>();
         spriteRenderer = GetComponent<SpriteRenderer>();
+        
     }
 
     private void Update()
@@ -65,7 +71,9 @@ public class enemies : MonoBehaviour
 
     private void Idle()
     {
-        animator.SetTrigger("idle");
+        animator.SetBool("idle", true);
+        animator.SetBool("attack", false);
+        animator.SetBool("run", false);
         if (Vector3.Distance(transform.position, playerTransform.position) <= playerenemydiff)
         {
             currentState = EnemyState.Chase;
@@ -75,7 +83,9 @@ public class enemies : MonoBehaviour
     private void Chase()
     {
         //animation
-        animator.SetTrigger("run");
+        animator.SetBool("run", true);
+        animator.SetBool("idle", false);
+        animator.SetBool("attack", false);
 
         //transfrom flip X
         if (Vector3.Distance(playerTransform.position, transform.position) > 0.01f)
@@ -111,10 +121,12 @@ public class enemies : MonoBehaviour
         transform.Translate(Vector2.zero);
 
         //animation
-        animator.SetTrigger("attack");
+        animator.SetBool("attack", true);
+        animator.SetBool("idle",false);
+        animator.SetBool("run",false);
 
         // Attack the player
-        playerTransform.GetComponent<player_move>().takedamage(attackDamage);
+        plmv.takedamage(attackDamage);
 
         //reset
         canAttack = false;
@@ -137,10 +149,12 @@ public class enemies : MonoBehaviour
     }
     void die()
     {
-        Debug.Log("enemy died");
 
         // animation
-        animator.SetTrigger("die");
+        animator.SetBool("die",true);
+        animator.SetBool("idle", true);
+        animator.SetBool("attack", true);
+        animator.SetBool("run", true);
 
         // disable enemy
         GetComponent<Collider2D>().enabled = false;
@@ -150,11 +164,15 @@ public class enemies : MonoBehaviour
         Destroy(gameObject, 1);
 
     }
-    private void OnCollisionEnter2D(Collision2D collision)
+    public void OnCollisionEnter2D(Collision2D collision)
     {
         if (collision.gameObject.CompareTag("Player"))
         {
-            GetComponent<player_move>().takedamage(attackDamage);
+
+            if (plmv != null)
+            {
+                plmv.takedamage(attackDamage);
+            }
         }
         if (collision.gameObject.CompareTag("bullet"))
         {

@@ -1,5 +1,4 @@
 using JetBrains.Annotations;
-using UnityEditor.Tilemaps;
 using UnityEngine;
 using UnityEngine.EventSystems;
 
@@ -11,7 +10,7 @@ public class player_move : MonoBehaviour
     private bool isFacingRight = true;
 
     public int maxhealth = 100;
-    int currentHealth;
+    int currentHealth =100;
 
     public Animator animator;
 
@@ -28,13 +27,28 @@ public class player_move : MonoBehaviour
         //animation run based on if player collide with armor suit or not to change the animation
         if (GetComponent<lvl2>().armorsuit)
         {
-            animator.SetFloat("speed_xr", Mathf.Abs(horizontalInput));
-            animator.SetFloat("speed_yr", Mathf.Abs(verticalInput));
+
+            if (horizontalInput != 0 | verticalInput != 0)
+            {
+                animator.SetBool("speed_xr", true);
+                animator.SetBool("idler", false);
+                animator.SetBool("attack", false);
+
+            }
+            else
+            {
+                animator.SetBool("idler", true);
+                animator.SetBool("attack", false);
+                animator.SetBool("speed_xr", false);
+            }
         }
         else
         {
-            animator.SetFloat("speed_x", Mathf.Abs(horizontalInput));
-            animator.SetFloat("speed_y", Mathf.Abs(verticalInput));
+            if (horizontalInput != 0 | verticalInput != 0)
+                animator.SetBool("speed", true);
+            else
+                animator.SetBool("speed", false);
+
         }
 
         Vector3 newPosition = transform.position + new Vector3(horizontalInput, verticalInput, 0) * speed * Time.deltaTime;

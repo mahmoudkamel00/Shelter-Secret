@@ -108,6 +108,7 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
 --- !u!50 &5310159770588044756
 Rigidbody2D:
   serializedVersion: 4
@@ -167,6 +168,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cfcad1fd847fead43ad78c15c464c4d6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  animator: {fileID: 0}
+  spriteRenderer: {fileID: 0}
   currentState: 0
   playerTransform: {fileID: 0}
   moveSpeed: 2
@@ -175,3 +178,4 @@ MonoBehaviour:
   attackRange: 1
   attackCooldown: 2
   maxHealth: 50
+  plmv: {fileID: 0}

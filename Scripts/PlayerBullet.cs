@@ -10,6 +10,7 @@ public class PlayerBullet : MonoBehaviour
 
     private void Start()
     {
+
         rb.velocity = transform.right * speed;
     }
 

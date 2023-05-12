@@ -32,13 +32,15 @@ public class enemies : MonoBehaviour
 
 
     public int maxHealth = 50;
-    int currentHealth;
+    [HideInInspector]public int currentHealth;
 
    public player_move plmv;
     //public enemies(int attackDamage)
     //{
     //    this.attackDamage = attackDamage;
     //}
+    public char BorZ = 'Z';
+    [HideInInspector] public bool BossKilled = false;
 
     private void Start()
     {
@@ -147,7 +149,7 @@ public class enemies : MonoBehaviour
             currentState = EnemyState.Idle;
 
     }
-    void die()
+    public void die()
     {
 
         // animation
@@ -158,10 +160,17 @@ public class enemies : MonoBehaviour
 
         // disable enemy
         GetComponent<Collider2D>().enabled = false;
-        GetComponent<Rigidbody2D>().gravityScale = 0;
         this.enabled = false;
         //Instantiate(deatheffect, transform.position, Quaternion.identity);
-        Destroy(gameObject, 1);
+        if (BorZ == 'Z')
+        {
+            Destroy(gameObject, 1);
+        }
+        else if (BorZ == 'B') 
+        {
+            BossKilled = true;
+            Destroy(gameObject, 2);
+        }
 
     }
     public void OnCollisionEnter2D(Collision2D collision)

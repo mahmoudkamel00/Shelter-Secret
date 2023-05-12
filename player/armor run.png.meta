@@ -33,7 +33,7 @@ TextureImporter:
   maxTextureSize: 2048
   textureSettings:
     serializedVersion: 2
-    filterMode: 1
+    filterMode: 0
     aniso: 1
     mipBias: 0
     wrapU: 1
@@ -199,11 +199,11 @@ TextureImporter:
     weights: []
     secondaryTextures: []
     nameFileIdTable:
-      armor run_0: -446298551
       armor run_1: 290117806
+      armor run_0: -446298551
+      armor run_4: 1896388244
       armor run_2: 1884484388
       armor run_3: -1979417180
-      armor run_4: 1896388244
   spritePackingTag: 
   pSDRemoveMatte: 0
   pSDShowRemoveMatteOption: 0

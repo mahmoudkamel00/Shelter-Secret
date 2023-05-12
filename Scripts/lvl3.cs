@@ -1,46 +1,62 @@
 using System.Collections;
 using System.Collections.Generic;
+using UnityEditor.SearchService;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class lvl3 : MonoBehaviour
 {
-    bool BossKilled = false;
-    GameObject collider;
-    Animator animator;
+    public GameObject collider;
+    private SpriteRenderer spriteRenderer;
+    [HideInInspector] public Vector3 respawnpoint;
 
-    public PlayerBullet bullet;
-    public Transform launchOffset;
-
-    float nextAttackTime = 0;
-    public float attackRate = 1f;
-
+    public AudioSource soundsource1, soundsource2;
+    public AudioClip soundclip1, soundclip2;
     // Start is called before the first frame update
     void Start()
     {
-        
+        soundsource1.clip = soundclip1;
+        soundsource1.Play();
+        soundsource1.loop = false;
+
+        soundsource2.clip = soundclip2;
+        soundsource2.PlayDelayed(soundclip1.length);
+        soundsource2.loop = true;
+
+        spriteRenderer = GetComponent<SpriteRenderer>();
+        respawnpoint = transform.position;
+
     }
 
     // Update is called once per frame
     void Update()
     {
 
-        if (Input.GetKeyDown(KeyCode.J))
+        if ( Time.time > 60 )
         {
-            if (Time.time >= nextAttackTime) //to make the player doesn't attack consecutive, using time
-            {
-                //animator.SetTrigger("attack");
-                Instantiate(bullet, launchOffset.position, transform.rotation);
-                nextAttackTime = Time.time + attackRate;
-                animator.SetTrigger("attack");
-            }
+            collider.GetComponent<BoxCollider2D>().enabled = false;
         }
-        
+
     }
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        if (collision.gameObject.CompareTag("collider") && BossKilled)
+        if (collision.gameObject.CompareTag("checkpoint"))
         {
-            collider.SetActive(false);
+            respawnpoint = transform.position;
         }
+        if (collision.gameObject.CompareTag("win"))
+        {
+            SceneManager.LoadScene("victory");
+        }
+    }
+    public void updaetcheckpoint(Vector2 pos)
+    {
+        respawnpoint = pos;
+    }
+    public void musicvolume(float volume)
+    {
+        soundsource1.volume = volume;
+        soundsource2.volume = volume;
+
     }
 }

@@ -7,16 +7,18 @@ public class player_move : MonoBehaviour
     public float speed = 5f;
     SpriteRenderer spriteRenderer;
     private Rigidbody2D rb;
-    private bool isFacingRight = true;
+    [HideInInspector] public bool isFacingRight = true;
 
     public int maxhealth = 100;
-    int currentHealth =100;
+    [HideInInspector] public int currentHealth =100;
 
     public Animator animator;
 
+    public healthbar healthbar;
     private void Start()
     {
         currentHealth = maxhealth;
+        healthbar.sethealth(maxhealth);
         rb = GetComponent<Rigidbody2D>();
     }
     void Update()
@@ -46,7 +48,7 @@ public class player_move : MonoBehaviour
         {
             if (horizontalInput != 0 | verticalInput != 0)
                 animator.SetBool("speed", true);
-            else
+            else 
                 animator.SetBool("speed", false);
 
         }
@@ -76,7 +78,7 @@ public class player_move : MonoBehaviour
     {
 
         currentHealth -= damage;
-
+        healthbar.sethealth(currentHealth);
         if (currentHealth <= 0)
         {
             die();

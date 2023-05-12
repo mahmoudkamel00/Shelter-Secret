@@ -24,10 +24,27 @@ public class lvl2 : MonoBehaviour
 
     [HideInInspector]public Vector3 respawnpoint;
 
+  
+
+    public AudioSource soundsource1;
+    public AudioClip soundclip1;
+
+    bool lvl3 = false;
     private void Start()
     {
         spriteRenderer = GetComponent<SpriteRenderer>();
         respawnpoint = transform.position;
+        if (lvl3)
+        {
+            soundsource1.Stop();
+        }
+        else
+        {
+            soundsource1.clip = soundclip1;
+            soundsource1.Play();
+            soundsource1.loop = true;
+        }
+       
     }
     // Update is called once per frame
     void Update()
@@ -52,6 +69,9 @@ public class lvl2 : MonoBehaviour
         if (collision.gameObject.CompareTag("teleporter") && nextLevel)
         {
             SceneManager.LoadScene("level3");
+            lvl3 = true;
+            spriteRenderer.sprite = transformedSprite;
+            animator.SetBool("diler", true);
         }
         if (collision.gameObject.CompareTag("armor"))
         {
@@ -80,5 +100,18 @@ public class lvl2 : MonoBehaviour
             // All key pieces collected, load the next level
             nextLevel = true;
         }
+    }
+    private System.Collections.IEnumerator cooldown()
+    {
+        // Wait for the specified cooldown duration
+        yield return new WaitForSeconds(1);
+
+        // Set the attack flag to true, allowing the enemy to attack again
+        
+    }
+   
+    public void musicvolume(float volume)
+    {
+        soundsource1.volume = volume;
     }
 }

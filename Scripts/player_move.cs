@@ -23,6 +23,8 @@ public class player_move : MonoBehaviour
     }
     void Update()
     {
+        if (DialogueManager.isActive)
+            return;
         float horizontalInput = Input.GetAxis("Horizontal");
         float verticalInput = Input.GetAxis("Vertical");
 

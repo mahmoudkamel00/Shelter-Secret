@@ -79,7 +79,7 @@ SpriteRenderer:
   m_SortingOrder: 1
   m_Sprite: {fileID: -1801164723, guid: fe4e05bbf6279b24281afff63ae93304, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
-  m_FlipX: 1
+  m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
   m_Size: {x: 0.6875, y: 0.8125}
@@ -108,6 +108,7 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
 --- !u!50 &5310159770588044756
 Rigidbody2D:
   serializedVersion: 4
@@ -173,9 +174,11 @@ MonoBehaviour:
   playerTransform: {fileID: 0}
   moveSpeed: 2
   playerenemydiff: 7
-  attackDamage: 10
+  attackDamage: 5
   attackRange: 1
   attackCooldown: 2
   maxHealth: 50
+  currentHealth: 0
   plmv: {fileID: 0}
   BorZ: 90
+  BossKilled: 0

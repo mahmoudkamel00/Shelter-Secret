@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 6251425494919371903}
   - component: {fileID: 160383956485247097}
-  m_Layer: 0
+  m_Layer: 5
   m_Name: bullet
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -25,7 +25,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4328044274268377018}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.02, y: -0.12, z: -4}
+  m_LocalPosition: {x: 0.02, y: -0.12, z: 0}
   m_LocalScale: {x: 0.2, y: 0.2, z: 0.2}
   m_ConstrainProportionsScale: 1
   m_Children: []
@@ -72,7 +72,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 0
+  m_SortingOrder: 8
   m_Sprite: {fileID: 21300000, guid: 57fa478fa945cf14dafc2115045da7f5, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -96,7 +96,7 @@ GameObject:
   - component: {fileID: 5922445062656529158}
   - component: {fileID: 8805930410728219738}
   - component: {fileID: 6063041149682153196}
-  m_Layer: 0
+  m_Layer: 5
   m_Name: projectile 3
   m_TagString: bullet
   m_Icon: {fileID: 0}
@@ -111,7 +111,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5894824164722448917}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 13.81, y: -14.22, z: -2.79}
+  m_LocalPosition: {x: 13.81, y: -14.22, z: 0}
   m_LocalScale: {x: 2, y: 2, z: 2}
   m_ConstrainProportionsScale: 1
   m_Children:

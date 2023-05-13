@@ -10,6 +10,7 @@ public class UIcontroller : MonoBehaviour
     {
         GetComponent<lvl2>().musicvolume(musicslider.value);
         GetComponent<lvl1>().musicvolume(musicslider.value);
-
+        GetComponent<lvl3>().musicvolume(musicslider.value);
+        GetComponent<mainmenu>().musicvolume(musicslider.value);
     }
 }
